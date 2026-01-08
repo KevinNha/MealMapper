@@ -1,0 +1,8 @@
+{
+  "android": {
+    "package": "com.anonymous.mealmappersource"
+  },
+  "ios": {
+    "bundleIdentifier": "com.anonymous.mealmappersource"
+  }
+}

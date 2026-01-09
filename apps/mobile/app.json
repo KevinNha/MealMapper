@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Mobile",
+    "name": "MealMapper",
     "slug": "meal-mapper-mobile",
     "version": "1.0.0",
     "orientation": "portrait",

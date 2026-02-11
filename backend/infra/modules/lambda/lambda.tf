@@ -1,6 +1,6 @@
 data "archive_file" "zip_lambda_function" {
   type        = "zip"
-  source_file = "${var.source_dir}/${var.function_name}.py"
+  source_dir  = var.source_dir
   output_path = "${path.module}/${var.function_name}-${var.stage}.zip"
 }
 
@@ -23,7 +23,7 @@ resource "aws_iam_role" "lambda_execution_role" {
 }
 
 resource "aws_iam_role_policy_attachment" "lambda_policy_attachments" {
-  for_each   = toset(var.policy_arns)
+  for_each   = var.policy_arns
   role       = aws_iam_role.lambda_execution_role.name
   policy_arn = each.value
 }
@@ -38,6 +38,9 @@ resource "aws_lambda_function" "lambda" {
   runtime     = var.config.runtime
   memory_size = var.config.memory_size
   timeout     = var.config.timeout
+  logging_config {
+    log_format = "JSON"
+  }
 
   environment {
     variables = var.env_variables

@@ -20,8 +20,9 @@ variable "env_variables" {
 }
 
 variable "policy_arns" {
-  description = "The IAM policy ARNs to attach to the Lambda function"
-  type        = list(string)
+  description = "Map of names to IAM policy ARNs to attach to the Lambda function (use static keys so for_each is known at plan time)"
+  type        = map(string)
+  default     = {}
 }
 
 variable "config" {

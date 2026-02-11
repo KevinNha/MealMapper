@@ -1,0 +1,114 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the recipe with the website name"
+    },
+    "description": {
+      "type": "string",
+      "description": "A short description of the recipe"
+    },
+    "totalTime": {
+      "type": "number",
+      "description": "The total time the recipe takes in minutes"
+    },
+    "servings": {
+      "type": "number",
+      "description": "The number of servings the recipe makes"
+    },
+    "ingredients": {
+      "type": "array",
+      "description": "The ingredients of the recipe",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the ingredient"
+          },
+          "quantity": {
+            "type": "number",
+            "description": "The quantity of the ingredient"
+          },
+          "unit": {
+            "type": "string",
+            "description": "The unit of the ingredient"
+          }
+        },
+        "required": [
+          "name",
+          "quantity",
+          "unit"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "isVegetarian": {
+      "type": "boolean",
+      "description": "Whether the recipe is vegetarian"
+    },
+    "isGlutenFree": {
+      "type": "boolean",
+      "description": "Whether the recipe is gluten free"
+    },
+    "isNutFree": {
+      "type": "boolean",
+      "description": "Whether the recipe is nut free"
+    },
+    "isDairyFree": {
+      "type": "boolean",
+      "description": "Whether the recipe is dairy free"
+    },
+    "instructions": {
+      "type": "array",
+      "description": "The instructions of the recipe",
+      "items": {
+        "type": "object",
+        "properties": {
+          "step": {
+            "type": "string",
+            "description": "The step of the instruction"
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the instruction"
+          },
+          "notes": {
+            "type": "string",
+            "description": "Any notes about the instruction"
+          }
+        },
+        "required": [
+          "step",
+          "description",
+          "notes"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "imageUrl": {
+      "type": "string",
+      "description": "The URL of the image of the recipe"
+    },
+    "sourceUrl": {
+      "type": "string",
+      "description": "The URL of the website the recipe is from"
+    }
+  },
+  "required": [
+    "name",
+    "description",
+    "totalTime",
+    "servings",
+    "ingredients",
+    "isVegetarian",
+    "isGlutenFree",
+    "isNutFree",
+    "isDairyFree",
+    "instructions",
+    "imageUrl",
+    "sourceUrl"
+  ],
+  "additionalProperties": false
+}

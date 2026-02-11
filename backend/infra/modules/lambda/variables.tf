@@ -1,3 +1,8 @@
+variable "stage" {
+  description = "The stage of the Lambda function"
+  type        = string
+}
+
 variable "source_dir" {
   description = "The directory containing the Lambda function code"
   type        = string
@@ -8,13 +13,14 @@ variable "function_name" {
   type        = string
 }
 
-variable "role_arn" {
-  description = "The ARN of the IAM role to attach to the Lambda function"
-  type        = string
-}
-
 variable "env_variables" {
   description = "The environment variables to pass to the Lambda function"
+  type        = map(string)
+  default     = {}
+}
+
+variable "policy_arns" {
+  description = "Map of names to IAM policy ARNs to attach to the Lambda function (use static keys so for_each is known at plan time)"
   type        = map(string)
   default     = {}
 }
@@ -24,9 +30,11 @@ variable "config" {
   type = object({
     memory_size = number
     timeout     = number
+    runtime     = string
   })
   default = {
     memory_size = 512
     timeout     = 60
+    runtime     = "python3.14"
   }
 }

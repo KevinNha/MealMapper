@@ -56,4 +56,9 @@ override.tf.json
 .terraformrc
 terraform.rc
 .terraform.tfstate.lock.info
+*.zip
 
+
+# Python
+__pycache__/
+.venv

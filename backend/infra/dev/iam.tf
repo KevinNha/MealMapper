@@ -14,7 +14,7 @@ resource "aws_iam_policy" "extract_recipe_policy" {
           "logs:CreateLogStream",
           "logs:PutLogEvents"
         ]
-        Effect = "Allow"
+        Effect   = "Allow"
         Resource = "*"
       }
     ]

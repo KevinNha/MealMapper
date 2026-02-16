@@ -8,7 +8,7 @@ def system_prompt():
     When extracting the recipe, adjust all the ingredients to be for one serving if you think it is appropriate.
 
     RecipeSchema:
-      - name: string # The name of the recipe with the website name
+      - name: string # The name of the recipe
       - description: string # A short description of the recipe
       - totalTime: number # The total time the recipe takes in minutes
       - servings: number # The number of servings the recipe makes
@@ -33,7 +33,7 @@ def system_prompt():
 
     Example:
       {
-        "name": "Banana Bread - Simply Recipes",
+        "name": "Banana Bread",
         "description": "A quick and easy recipe for a moist and flavorful banana bread.",
         "totalTime": 70
         "servings": 10

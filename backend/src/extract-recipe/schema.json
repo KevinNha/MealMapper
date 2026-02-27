@@ -9,7 +9,7 @@
       "type": "string",
       "description": "A short description of the recipe"
     },
-    "totalTime": {
+    "total_time": {
       "type": "number",
       "description": "The total time the recipe takes in minutes"
     },
@@ -36,27 +36,23 @@
             "description": "The unit of the ingredient"
           }
         },
-        "required": [
-          "name",
-          "quantity",
-          "unit"
-        ],
+        "required": ["name", "quantity", "unit"],
         "additionalProperties": false
       }
     },
-    "isVegetarian": {
+    "is_vegetarian": {
       "type": "boolean",
       "description": "Whether the recipe is vegetarian"
     },
-    "isGlutenFree": {
+    "is_gluten_free": {
       "type": "boolean",
       "description": "Whether the recipe is gluten free"
     },
-    "isNutFree": {
+    "is_nut_free": {
       "type": "boolean",
       "description": "Whether the recipe is nut free"
     },
-    "isDairyFree": {
+    "is_dairy_free": {
       "type": "boolean",
       "description": "Whether the recipe is dairy free"
     },
@@ -79,19 +75,15 @@
             "description": "Any notes about the instruction"
           }
         },
-        "required": [
-          "step",
-          "description",
-          "notes"
-        ],
+        "required": ["step", "description", "notes"],
         "additionalProperties": false
       }
     },
-    "imageUrl": {
+    "image_url": {
       "type": "string",
       "description": "The URL of the image of the recipe"
     },
-    "sourceUrl": {
+    "source_url": {
       "type": "string",
       "description": "The URL of the website the recipe is from"
     }
@@ -99,16 +91,16 @@
   "required": [
     "name",
     "description",
-    "totalTime",
+    "total_time",
     "servings",
     "ingredients",
-    "isVegetarian",
-    "isGlutenFree",
-    "isNutFree",
-    "isDairyFree",
+    "is_vegetarian",
+    "is_gluten_free",
+    "is_nut_free",
+    "is_dairy_free",
     "instructions",
-    "imageUrl",
-    "sourceUrl"
+    "image_url",
+    "source_url"
   ],
   "additionalProperties": false
 }

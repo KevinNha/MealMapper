@@ -1,0 +1,79 @@
+{
+  "name": "The Best Homemade Chicken Noodle Soup - Budget Bytes",
+  "description": "This is the BEST easy Homemade Chicken Noodle Soup recipe. It's delicious and made from scratch, just like Grandma used to make!",
+  "totalTime": 105,
+  "servings": 8,
+  "ingredients": [
+    { "name": "Yellow onion", "quantity": 0.125, "unit": "medium" },
+    { "name": "Garlic cloves", "quantity": 0.375, "unit": "cloves" },
+    { "name": "Carrots", "quantity": 0.5, "unit": "medium" },
+    { "name": "Celery ribs", "quantity": 0.25, "unit": "rib" },
+    { "name": "Fresh parsley", "quantity": 1.875, "unit": "teaspoon" },
+    { "name": "Olive oil", "quantity": 0.25, "unit": "tablespoon" },
+    { "name": "Dried basil", "quantity": 0.125, "unit": "teaspoon" },
+    { "name": "Dried thyme", "quantity": 0.0625, "unit": "teaspoon" },
+    { "name": "Bay leaf", "quantity": 0.125, "unit": "leaf" },
+    { "name": "Black pepper", "quantity": 0.03125, "unit": "teaspoon" },
+    { "name": "Salt", "quantity": 0.25, "unit": "teaspoon" },
+    {
+      "name": "Chicken breast (boneless, skinless)",
+      "quantity": 0.25,
+      "unit": "breast"
+    },
+    { "name": "Chicken broth", "quantity": 1, "unit": "cup" },
+    { "name": "Egg noodles (uncooked)", "quantity": 0.75, "unit": "ounces" }
+  ],
+  "isVegetarian": false,
+  "isGlutenFree": false,
+  "isNutFree": true,
+  "isDairyFree": true,
+  "instructions": [
+    {
+      "step": "Gather",
+      "description": "Gather your ingredients.",
+      "notes": ""
+    },
+    {
+      "step": "Prep",
+      "description": "Dice onion, mince garlic, peel and dice carrots, dice celery, and mince the fresh parsley. Set the parsley aside.",
+      "notes": ""
+    },
+    {
+      "step": "Saute",
+      "description": "Add olive oil, onion, carrots, and celery to a large soup pot and cook on medium heat until vegetables have softened, about 6 minutes, stirring occasionally.",
+      "notes": ""
+    },
+    {
+      "step": "Combine",
+      "description": "Add the minced garlic, dried basil, dried thyme, bay leaf, black pepper, and 1 tsp salt to the pot. Stir and cook an additional 5 minutes.",
+      "notes": ""
+    },
+    {
+      "step": "Cover",
+      "description": "Add chicken breasts to pot and cover with the chicken broth.",
+      "notes": ""
+    },
+    {
+      "step": "Simmer",
+      "description": "Cover the pot with a lid, bring it to a boil over high heat, then reduce the heat to low and simmer for one hour. Make sure the pot continues to simmer for the whole hour. If the heat is turned down too low and it is not bubbling away, the chicken will not shred easily.",
+      "notes": ""
+    },
+    {
+      "step": "Shred",
+      "description": "After an hour of simmering, remove the chicken from the pot. Using two forks, pull the meat and shred it. Taste the broth and season with additional salt, if needed. Begin with one teaspoon and add more to your liking.",
+      "notes": ""
+    },
+    {
+      "step": "Cook",
+      "description": "Add the egg noodles to the pot, turn the heat up to high, and boil the noodles until tender (about 7 minutes). Return the shredded chicken to the pot. Taste and season again with salt if needed.",
+      "notes": ""
+    },
+    {
+      "step": "Serve",
+      "description": "Finish with fresh parsley and serve hot!",
+      "notes": ""
+    }
+  ],
+  "imageUrl": "https://www.budgetbytes.com/wp-content/uploads/2017/02/Chicken-Noodle-Soup-Overhead.jpg",
+  "sourceUrl": "https://www.budgetbytes.com/chicken-noodle-soup/"
+}

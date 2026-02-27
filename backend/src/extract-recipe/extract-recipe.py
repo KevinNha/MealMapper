@@ -1,10 +1,19 @@
-import boto3
-import json
 import logging
+import json
+import os
 import re
+import sys
 import urllib.error
 from html import unescape
+
+import boto3
+
 from prompts import system_prompt
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# pylint: disable=wrong-import-position
+# pylint: disable=import-error
+from shared.models import Recipe
 
 
 logging.basicConfig(
@@ -48,13 +57,15 @@ def handler(event, context):
 
     recipes_from_jsonld = _extract_jsonld_recipes(content)
     if recipes_from_jsonld:
-        recipe = _extract_recipe(recipes_from_jsonld)
+        ai_output = _extract_recipe(recipes_from_jsonld)
     else:
-        recipe = _extract_recipe(_cheap_html_cleanup(content))
+        ai_output = _extract_recipe(_cheap_html_cleanup(ai_output))
+
+    recipe = _parse_ai_output(ai_output)
 
     return {
         "statusCode": 200,
-        "body": recipe,
+        "body": recipe.__dict__,
     }
 
 
@@ -67,6 +78,22 @@ def _get_url_from_event(event):
             return None
         return (payload or {}).get("url") or None
     return event.get("url")
+
+
+def _fetch_html(url):
+    req = urllib.request.Request(
+        url,
+        headers={
+            "User-Agent": "MealMapper/1.0 (Recipe extractor)",
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        },
+    )
+    with urllib.request.urlopen(req, timeout=20) as resp:
+        ctype = (resp.headers.get("Content-Type") or "").lower()
+        if "html" not in ctype and "xml" not in ctype:
+            raise ValueError(f"Non-HTML content-type: {ctype}")
+
+        return resp.read().decode("utf-8", errors="replace")
 
 
 def _extract_jsonld_recipes(html: str):
@@ -107,30 +134,6 @@ def _extract_jsonld_recipes(html: str):
     return recipes
 
 
-def _fetch_html(url):
-    req = urllib.request.Request(
-        url,
-        headers={
-            "User-Agent": "MealMapper/1.0 (Recipe extractor)",
-            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-        },
-    )
-    with urllib.request.urlopen(req, timeout=20) as resp:
-        ctype = (resp.headers.get("Content-Type") or "").lower()
-        if "html" not in ctype and "xml" not in ctype:
-            raise ValueError(f"Non-HTML content-type: {ctype}")
-
-        return resp.read().decode("utf-8", errors="replace")
-
-
-def _cheap_html_cleanup(html: str) -> str:
-    html = re.sub(r"<script\b[^>]*>.*?</script>", " ", html, flags=re.I | re.S)
-    html = re.sub(r"<style\b[^>]*>.*?</style>", " ", html, flags=re.I | re.S)
-    html = re.sub(r"<noscript\b[^>]*>.*?</noscript>", " ", html, flags=re.I | re.S)
-    html = re.sub(r"\s+", " ", html)
-    return html
-
-
 def _extract_recipe(content):
     """Extract the recipe from the page content."""
 
@@ -169,3 +172,30 @@ def _extract_recipe(content):
     logger.info("Stop reason: %s", response["stopReason"])
 
     return response["output"]["message"]
+
+
+def _cheap_html_cleanup(html: str) -> str:
+    html = re.sub(r"<script\b[^>]*>.*?</script>", " ", html, flags=re.I | re.S)
+    html = re.sub(r"<style\b[^>]*>.*?</style>", " ", html, flags=re.I | re.S)
+    html = re.sub(r"<noscript\b[^>]*>.*?</noscript>", " ", html, flags=re.I | re.S)
+    html = re.sub(r"\s+", " ", html)
+    return html
+
+
+def _parse_ai_output(ai_message: str) -> Recipe:
+    """Parse the AI message into a Recipe object."""
+    return Recipe(**json.loads(ai_message["content"][0]["text"]))
+
+
+# def _write_recipe_to_
+
+
+if __name__ == "__main__":
+    """Main function."""
+    with open("backend/src/mocks/mock_output_raw.json", "r", encoding="utf-8") as f:
+        mock_content = f.read()
+    mock_content = json.loads(mock_content)
+    output = _parse_ai_output(mock_content)
+    print("--------------------------------")
+    print(output.__dict__)
+    print("--------------------------------")

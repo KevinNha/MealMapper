@@ -2,7 +2,7 @@
 # Terraform then zips this dir in the lambda module. Run from backend/infra/dev (path.module = .).
 resource "null_resource" "build_extract_recipe" {
   triggers = {
-    requirements = filemd5("${path.module}/../../src/requirements.txt")
+    requirements = filemd5("${path.module}/../../src/extract-recipe/requirements.txt")
     source       = md5(join("", [for f in fileset("${path.module}/../../src/extract-recipe", "**") : filemd5("${path.module}/../../src/extract-recipe/${f}")]))
   }
 
@@ -10,11 +10,12 @@ resource "null_resource" "build_extract_recipe" {
     command     = <<-EOT
       set -e
       BUILD_DIR="${path.module}/../../build/extract-recipe"
-      SRC_DIR="${path.module}/../../src/extract-recipe"
-      REQ_FILE="${path.module}/../../src/requirements.txt"
-      mkdir -p "$BUILD_DIR"
+      SRC_DIR="${path.module}/../../src"
+      REQ_FILE="${path.module}/../../src/extract-recipe/requirements.txt"
+      mkdir -p "$BUILD_DIR"/shared
       pip install -r "$REQ_FILE" -t "$BUILD_DIR"
-      cp "$SRC_DIR"/extract-recipe.py "$SRC_DIR"/prompts.py "$SRC_DIR"/schema.json "$BUILD_DIR/"
+      cp "$SRC_DIR"/extract-recipe/*.py "$SRC_DIR"/extract-recipe/*.json "$BUILD_DIR/"
+      cp "$SRC_DIR"/shared/*.py "$BUILD_DIR/"shared/
       [ -f "$SRC_DIR/mock_content.txt" ] && cp "$SRC_DIR/mock_content.txt" "$BUILD_DIR/" || true
     EOT
     working_dir = path.module
